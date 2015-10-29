@@ -5,13 +5,13 @@
 #
 class zookeeper::params {
   case "${::osfamily}-${::operatingsystem}" {
-    /RedHat-Fedora/: {
+    /RedHat-Fedora|Debian/: {
       $packages = [ 'zookeeper' ]
       $daemon = 'zookeeper'
       $confdir = '/etc/zookeeper'
       $datadir = '/var/lib/zookeeper/data'
     }
-    /Debian|RedHat/: {
+    /RedHat/: {
       $packages = [ 'zookeeper-server' ]
       $daemon = 'zookeeper-server'
       $confdir = '/etc/zookeeper/conf'
