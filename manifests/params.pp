@@ -24,7 +24,7 @@ class zookeeper::params {
 
   $alternatives = "${::osfamily}-${::operatingsystem}" ? {
     /RedHat-Fedora/ => undef,
-    /Debian/        => 'undef',
+    /Debian/        => undef,
     # https://github.com/puppet-community/puppet-alternatives/issues/18
     /RedHat/        => '',
   }
