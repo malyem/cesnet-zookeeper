@@ -4,10 +4,13 @@
 #
 class zookeeper::config {
   if $zookeeper::hostnames {
-    $myid = array_search($zookeeper::hostnames, $::fqdn)
+    $_myid = array_search($zookeeper::hostnames, $::fqdn)
   } else {
-    $myid = undef
+    $_myid = undef
   }
+
+  $myid = hiera('zookeeper::config::myid', $_myid)
+
   notice("myid: ${myid}")
 
   if !$myid or $myid == 0 {
@@ -65,7 +68,7 @@ class zookeeper::config {
           owner   => 'zookeeper',
           group   => 'zookeeper',
           mode    => '0644',
-          replace => false,
+          replace => true,
           # lint:ignore:only_variable_string
           # (needed to convert integer to string)
           content => "${myid}",
